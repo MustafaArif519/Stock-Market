@@ -1,0 +1,9 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/mnt/c/Users/musta/Documents/Stock-Market'
+g++ -std=c++1z -Wconversion -Wall -Werror -Wextra -pedantic  -O3 -DNDEBUG -c main.cpp
+echo Edit EXECUTABLE variable in Makefile.
+echo Using default a.out.
+g++ -std=c++1z -Wconversion -Wall -Werror -Wextra -pedantic  -O3 -DNDEBUG main.o
+ 
+make: Leaving directory '/mnt/c/Users/musta/Documents/Stock-Market'
+ 

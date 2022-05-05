@@ -1,0 +1,547 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.2.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Thu May  5 16:36:16 2022
+
+# Variables
+
+ 
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+WSLENV = ELECTRON_RUN_AS_NODE/w:
+# default
+.SHELLFLAGS := -c
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /mnt/c/Users/musta/Documents/Stock-Market
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
+# environment
+_ = /mnt/c/Users/musta/AppData/Local/Programs/Microsoft VS Code/bin/code
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# 'override' directive
+GNUMAKEFLAGS := 
+# makefile (from 'Makefile', line 63)
+SOURCES := main.cpp
+# makefile (from 'Makefile', line 81)
+CXXFLAGS = -std=c++1z -Wconversion -Wall -Werror -Wextra -pedantic 
+# environment
+XDG_DATA_DIRS = /usr/local/share:/usr/share:/var/lib/snapd/desktop
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from 'Makefile', line 68)
+FULL_SUBMITFILE = fullsubmit.tar.gz
+# makefile (from 'Makefile', line 59)
+TESTS = $(TESTSOURCES:%.cpp=%)
+# environment
+LESSOPEN = | /usr/bin/lesspipe %s
+# environment
+VSCODE_CWD = /mnt/c/Users/musta/AppData/Local/Programs/Microsoft VS Code
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# makefile (from 'Makefile', line 43)
+PATH := /usr/um/gcc-6.2.0/bin:/home/mustafa/.vscode-server/bin/57fd6d0195bb9b9d1b49f6da5db789060795de47/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/musta/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/musta/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/musta/AppData/Local/GitHubDesktop/bin:/snap/bin
+# makefile (from 'Makefile', line 134)
+define make_tests
+    ifeq ($$(PROJECTFILE),)
+	    @echo Edit PROJECTFILE variable to .cpp file with main\(\)
+	    @exit 1
+    endif
+    SRCS = $$(filter-out $$(PROJECTFILE), $$(SOURCES))
+    OBJS = $$(SRCS:%.cpp=%.o)
+    HDRS = $$(wildcard *.h *.hpp)
+    $(1): CXXFLAGS += -g3 -DDEBUG
+    $(1): $$(OBJS) $$(HDRS) $(1).cpp
+	$$(CXX) $$(CXXFLAGS) $$(OBJS) $(1).cpp -o $(1)
+endef
+# makefile (from 'Makefile', line 57)
+TESTSOURCES = $(wildcard test*.cpp)
+# makefile (from 'Makefile', line 76)
+PERF_FILE = perf.data*
+# makefile (from 'Makefile', line 220)
+define MAKEFILE_HELP
+EECS281 Advanced Makefile Help
+* This Makefile uses advanced techniques, for more information:
+    $$ man make
+
+* General usage
+    1. Follow directions at each "TODO" in this file.
+       a. Set EXECUTABLE equal to the name from the project specification.
+       b. Set PROJECTFILE equal to the name of the source file with main()
+       c. Add any dependency rules specific to your files.
+    2. Build, test, submit... repeat as necessary.
+
+* Preparing submissions
+    A) To build 'partialsubmit.tar.gz', a tarball without tests used to
+       find buggy solutions in the autograder.
+
+           *** USE THIS ONLY FOR TESTING YOUR SOLUTION! ***
+
+       This is useful for faster autograder runs during development and
+       free submissions if the project does not build.
+           $$ make partialsubmit
+    B) Build 'fullsubmit.tar.gz' a tarball complete with autograder test
+       files.
+
+           *** ALWAYS USE THIS FOR FINAL GRADING! ***
+
+       It is also useful when trying to find buggy solutions in the
+       autograder.
+           $$ make fullsubmit
+
+* Unit testing support
+    A) Source files for unit testing should be named test*.cpp.  Examples
+       include test_input.cpp or test3.cpp.
+    B) Automatic build rules are generated to support the following:
+           $$ make test_input
+           $$ make test3
+           $$ make alltests        (this builds all test drivers)
+    C) If test drivers need special dependencies, they must be added
+       manually.
+    D) IMPORTANT: NO SOURCE FILES WITH NAMES THAT BEGIN WITH test WILL BE
+       ADDED TO ANY SUBMISSION TARBALLS.
+
+* Static Analysis support
+    A) Matches current autograder style grading tests
+    B) Usage:
+           $$ make static
+
+* Sync to CAEN support
+    A) Requires an .ssh/config file with a login.engin.umich.edu host
+       defined, SSH Multiplexing enabled, and an open SSH connection.
+    B) Edit the REMOTE_BASEDIR variable if default is not preferred.
+    C) Usage:
+           $$ make sync2caen
+endef
+# environment
+VSCODE_LOG_STACK = false
+# environment
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-1c371e73-f8fd-4468-9a36-3485124be0af.sock
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# environment
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+# automatic
+%F = $(notdir $%)
+# makefile (from 'Makefile', line 176)
+PARTIAL_SUBMITFILES = $(filter-out $(wildcard test*.txt), $(FULL_SUBMITFILES))
+# makefile (from 'Makefile', line 70)
+UNGRADED_SUBMITFILE = ungraded.tar.gz
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /mnt/c/Users/musta/Documents/Stock-Market
+# default
+.LOADED := 
+# environment
+WSL_INTEROP = /run/WSL/8_interop
+# makefile (from 'Makefile', line 45)
+LD_RUN_PATH := /usr/um/gcc-6.2.0/lib64
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/mustafa
+# makefile (from 'Makefile', line 44)
+LD_LIBRARY_PATH := /usr/um/gcc-6.2.0/lib64
+# environment
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# environment
+LOGNAME = mustafa
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+SHLVL = 1
+# default
+MAKE_VERSION := 4.2.1
+# environment
+USER = mustafa
+# makefile
+.DEFAULT_GOAL := release
+# environment
+NAME = Code
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/musta/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.2
+# default
+MAKE_COMMAND := make
+# makefile (from 'Makefile', line 28)
+IDENTIFIER = EEC50281EEC50281EEC50281EEC50281EEC50281
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# makefile (from 'Makefile', line 73)
+EXCLUDE_FILES = getopt.\?
+# makefile
+MAKEFLAGS = pqrR
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from 'Makefile', line 164)
+FULL_SUBMITFILES = $(filter-out $(TESTSOURCES), $(wildcard Makefile *.h *.hpp *.cpp test*.txt))
+# automatic
++F = $(notdir $+)
+# makefile (from 'Makefile', line 51)
+REMOTE_PATH := eecs281_executable_sync
+# makefile (from 'Makefile', line 24)
+UNIQNAME = youruniqname
+# environment
+VSCODE_HANDLES_SIGPIPE = true
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# makefile (from 'Makefile', line 31)
+EXECUTABLE = executable
+# makefile (from 'Makefile', line 69)
+PARTIAL_SUBMITFILE = partialsubmit.tar.gz
+# makefile (from 'Makefile', line 54)
+CXX = g++
+# environment
+LC_ALL = C
+# environment
+HOSTTYPE = x86_64
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# makefile (from 'Makefile', line 35)
+PROJECTFILE = $(or $(wildcard project*.cpp $(EXECUTABLE).cpp), main.cpp)
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# default
+.RECIPEPREFIX := 
+# makefile (from 'Makefile', line 65)
+OBJECTS = $(SOURCES:%.cpp=%.o)
+# makefile (from 'Makefile', line 184)
+UNGRADED_SUBMITFILES = $(filter-out Makefile, $(PARTIAL_SUBMITFILES))
+# environment
+LANG = C
+# environment
+TERM = xterm-256color
+# environment
+VSCODE_EXTHOST_WILL_SEND_SOCKET = true
+# environment
+WSL_DISTRO_NAME = Ubuntu-20.04
+# environment
+MOTD_SHOWN = update-motd
+# variable set hash-table stats:
+# Load=91/1024=9%, Rehash=0, Collisions=4/157=3%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 47, inode 1970324837429928): 27 files, no impossibilities.
+
+# 27 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+%.o: %.cpp
+#  recipe to execute (from 'Makefile', line 152):
+	$(CXX) $(CXXFLAGS) -c $*.cpp
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+all: release debug profile
+#  Phony target (prerequisite of .PHONY).
+#  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+
+.PHONY: all release debug profile gprof static clean alltests partialsubmit fullsubmit ungraded sync2caen help identifier
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-05 16:35:54.8657096
+#  File has been updated.
+#  Successfully updated.
+
+# makefile (from 'Makefile', line 90)
+debug: CXXFLAGS += -g3 -DDEBUG
+debug:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=1/32=3%, Rehash=0, Collisions=0/2=0%
+#  recipe to execute (from 'Makefile', line 92):
+	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(EXECUTABLE)_debug
+
+fullsubmit: identifier fullsubmit.tar.gz
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+main.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-04 16:42:58.7004832
+#  File has been updated.
+#  Successfully updated.
+
+fullsubmit.tar.gz: Makefile main.cpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 170):
+	rm -f $(PARTIAL_SUBMITFILE) $(FULL_SUBMITFILE) $(UNGRADED_SUBMITFILE)
+	COPYFILE_DISABLE=true tar --exclude=$(EXCLUDE_FILES) -vczf $(FULL_SUBMITFILE) $(FULL_SUBMITFILES)
+	@echo !!! Final submission prepared, test files included... READY FOR GRADING !!!
+ 
+
+static:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 107):
+	cppcheck --enable=all --suppress=missingIncludeSystem \
+      $(SOURCES) *.h *.hpp
+
+help:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 277):
+	@echo "$$MAKEFILE_HELP"
+
+sync2caen:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 201):
+	@echo Edit UNIQNAME variable in Makefile.
+	@exit 1;
+	# Synchronize local files into target directory on CAEN
+	rsync \
+      -av \
+      --delete \
+      --exclude '*.o' \
+      --exclude '$(EXECUTABLE)' \
+      --exclude '$(EXECUTABLE)_debug' \
+      --exclude '$(EXECUTABLE)_profile' \
+      --exclude '.git*' \
+      --exclude '.vs*' \
+      --exclude '*.code-workspace' \
+      --filter=":- .gitignore" \
+      "."/ \
+      "$(UNIQNAME)@login.engin.umich.edu:'$(REMOTE_PATH)/'"
+	echo "Files synced to CAEN at ~/$(REMOTE_PATH)/"
+
+# makefile (from 'Makefile', line 100)
+gprof: CXXFLAGS += -pg
+gprof:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=1/32=3%, Rehash=0, Collisions=0/2=0%
+#  recipe to execute (from 'Makefile', line 102):
+	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(EXECUTABLE)_profile
+
+# makefile (from 'Makefile', line 85)
+release: CXXFLAGS += -O3 -DNDEBUG
+release: executable
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=1/32=3%, Rehash=0, Collisions=1/8=12%
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 156):
+	rm -f $(OBJECTS) $(EXECUTABLE) $(EXECUTABLE)_debug $(EXECUTABLE)_profile \
+      $(TESTS) $(PARTIAL_SUBMITFILE) $(FULL_SUBMITFILE) $(PERF_FILE) \
+      $(UNGRADED_SUBMITFILE)
+	rm -Rf *.dSYM
+
+ungraded: identifier ungraded.tar.gz
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+partialsubmit: identifier partialsubmit.tar.gz
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+ungraded.tar.gz: main.cpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 186):
+	rm -f $(PARTIAL_SUBMITFILE) $(FULL_SUBMITFILE) $(UNGRADED_SUBMITFILE)
+	@touch __ungraded
+	COPYFILE_DISABLE=true tar --exclude=$(EXCLUDE_FILES) -vczf $(UNGRADED_SUBMITFILE) \
+      $(UNGRADED_SUBMITFILES) __ungraded
+	@rm -f __ungraded
+	@echo !!! WARNING: This submission will not be graded. !!!
+
+executable: main.o
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/6=0%
+#  recipe to execute (from 'Makefile', line 126):
+	@echo Edit EXECUTABLE variable in Makefile.
+	@echo Using default a.out.
+	$(CXX) $(CXXFLAGS) $(OBJECTS)
+
+partialsubmit.tar.gz: Makefile main.cpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 178):
+	rm -f $(PARTIAL_SUBMITFILE) $(FULL_SUBMITFILE) $(UNGRADED_SUBMITFILE)
+	COPYFILE_DISABLE=true tar --exclude=$(EXCLUDE_FILES) -vczf $(PARTIAL_SUBMITFILE) \
+      $(PARTIAL_SUBMITFILES)
+	@echo !!! WARNING: No test files included. Use 'make fullsubmit' to include test files. !!!
+
+main.o: main.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'main'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := main.o
+# automatic
+# % := 
+# automatic
+# * := main
+# automatic
+# + := main.cpp
+# automatic
+# | := 
+# automatic
+# < := main.cpp
+# automatic
+# ^ := main.cpp
+# automatic
+# ? := main.cpp
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  recipe to execute (from 'Makefile', line 152):
+	$(CXX) $(CXXFLAGS) -c $*.cpp
+
+identifier:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 114):
+	@if [ $$(grep --include=*.{h,hpp,c,cpp} --exclude=xcode_redirect.hpp --exclude=$(EXCLUDE_FILES) --directories=skip -L $(IDENTIFIER) * | wc -l) -ne 0 ]; then \
+		printf "Missing project identifier in file(s): "; \
+		echo `grep --include=*.{h,hpp,c,cpp} --directories=skip -L $(IDENTIFIER) *`; \
+		rm -f $(PARTIAL_SUBMITFILE) $(FULL_SUBMITFILE); \
+		exit 1; \
+	fi
+
+# makefile (from 'Makefile', line 95)
+profile: CXXFLAGS += -g3 -O3
+profile:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=1/32=3%, Rehash=0, Collisions=0/2=0%
+#  recipe to execute (from 'Makefile', line 97):
+	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(EXECUTABLE)_profile
+	
+
+alltests:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=24/1024=2%, Rehash=0, Collisions=1/79=1%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 54 / storage = 682 B / avg = 12 B
+# current buf: size = 8162 B / used = 682 B / count = 54 / avg = 12 B
+
+# strcache performance: lookups = 121 / hit rate = 55%
+# hash-table stats:
+# Load=54/8192=1%, Rehash=0, Collisions=2/121=2%
+# Finished Make data base on Thu May  5 16:36:16 2022
+
+ 
